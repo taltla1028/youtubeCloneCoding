@@ -56,14 +56,15 @@ function VideoUploadPage(){
                     fileName: response.data.fileName
                 }
 
-                Axios.post('api/video/thumbnail'.variable)
+                Axios.post('/api/video/thumbnail',variable)
                 .then(response => {
                     if(response.data.success){
-
+                        console.log(response.data)
                     }else{
                         alert('썸내일 생성에 실패했습니다.')
                     }
                 })
+
             }else{
                 alert('비디오 업로드를 실패했습니다.')
             }
@@ -83,7 +84,7 @@ function VideoUploadPage(){
                         <Dropzone 
                         onDrop={onDrop}
                         multiple={false}
-                        maxSize={1000000000}
+                        maxSize={100000000000000000}
                         >
 
                         {({ getRootProps, getInputProps}) => (
