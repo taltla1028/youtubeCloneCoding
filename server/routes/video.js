@@ -4,14 +4,14 @@ const router = express.Router();
 
 const { auth } = require("../middleware/auth");
 const multer = require("multer");
-
+var ffmpeg = require("fluent-ffmpeg");
 // STRAGE MULTER CONFIG
 let storage = multer.diskStorage({
     destination: (req, file, cb) => {
         cb(null, "uploads/");
     },
     filename: (req, file, cb) => {
-        cd(null, `${Date.now()}_${file.originalname}`);
+        cb(null, `${Date.now()}_${file.originalname}`);
     },
     fileFilter: (req, file, cb) => {
         const ext = path.extname(file.originalname)
@@ -39,4 +39,37 @@ router.post('/uploadfiles',(req, res) => {
     })
 
 })
+
+
+router.post('/thumbnail',(req, res) => { 
+
+   // 썸내일 생성 하고 비디오 러닝타임도 가져오기
+   
+   ffmpeg(req.body.url)
+   .on('filenames',function(filenames){
+       console.log('Will generate ' + filenames.join(','))
+       console.log(filenames)
+
+       filePath = "uploads/thubnails/" + filenames[0]
+   })
+   .on('end', function() {
+       console.log('Secreenshots taken');
+       return res.json({success: true, url: filePath, fileName: filenames, fileDuration: fileDurat
+    })
+    .on('error', function(err){
+        console.error(err);
+        return res.json({success: false, err});
+    })
+    .screenshots({
+        // will take screenshots at 20%, 40%, 60% and 80% of the video
+        count: 3,
+        folder: 'uploads/thumbnails',
+        size: '320x240',
+        // '%b' : input basename (filename w/o extension)
+        filename : 'thumbnail-%b.png'
+    })
+   })
+
+})
+
 module.exports = router;
