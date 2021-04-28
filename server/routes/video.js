@@ -46,7 +46,7 @@ router.post('/uploadVideo',(req, res) => {
     //비디오 정보들을 저장한다.,
     const video = new Video(req.body)
 
-    Video.save((err, doc) => {
+    video.save((err, doc) => {
         if(err) return res.json({ success: false, err })
         res.status(200).json({ success: true })
     })
