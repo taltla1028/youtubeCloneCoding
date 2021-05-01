@@ -1,7 +1,6 @@
 const express = require('express');
 const router = express.Router();
 const { Video } = require("../models/Video");
-
 const { auth } = require("../middleware/auth");
 const multer = require("multer");
 var ffmpeg = require("fluent-ffmpeg");
@@ -51,7 +50,7 @@ router.post('/uploadVideo',(req, res) => {
         res.status(200).json({ success: true })
     })
 
-})
+});
 
 router.get('/getVideos', (req, res) => {
 
@@ -66,7 +65,18 @@ router.get('/getVideos', (req, res) => {
 
 
 
-})
+});
+
+router.post('/getVideoDetail',(req, res) => {
+
+    Video.findOne({"_id": req.body.videoId })
+        .populate('writer')
+        .exec((err, videoDetail) => {
+            if (err) return res.status(400).send(err) 
+            res.status(200).json({ success: true, videoDetail })
+        })
+    
+});
 
 
 router.post('/thumbnail', (req, res) => { 
