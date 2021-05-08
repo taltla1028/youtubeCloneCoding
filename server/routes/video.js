@@ -128,20 +128,20 @@ router.post('/getSubscriptionVideos',(req, res) => {
         .exec((err, subscriberInfo ) => {
             if(err) return res.status(400).send(err);
 
-            let subscriberUser = [];
-            subscriberInfo.map((subscriber,i) => {
+            let subscribedUser = [];
+            subscriberInfo.map((subscriber, i) => {
                 subscribedUser.push(subscriber.userTo);
 
             })
             
               // 찾은 사람들의 비디오를 가지고 온다.
 
-              Video.find({ writer: { $in: subscribedUser } })
-              .populate('writer')
-              .exec((err, videos) => {
-                  if(err) return res.status(400).send(err);
-                  res.status(200).json({success: true, videos })
-              })
+            Video.find({ writer: { $in: subscribedUser } })
+            .populate('writer')
+            .exec((err, videos) => {
+                if(err) return res.status(400).send(err);
+                res.status(200).json({success: true, videos })
+            })
     
     
         })
