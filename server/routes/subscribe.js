@@ -10,7 +10,7 @@ const { Subscriber } = require("../models/Subscriber");
 //             Subscriber
 //=================================
 
-router.post('/subscribeNumbers',(req, res) => { 
+router.post('/subscribeNumber',(req, res) => { 
 
     Subscriber.find({ 'userTo': req.body.userTo})
     .exec((err, subscribe) => {
