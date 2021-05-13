@@ -2,8 +2,8 @@ import Axios from 'axios'
 import React, { useState } from 'react'
 import { useSelector } from 'react-redux';
 
-function Comment() {
-    const videoId = props.match.params.videoId
+function Comment(props) {
+    const videoId = props.postId;
     const user = useSelector(state => state.user);
     const [commentValue, setcommentValue] = useState("")
     const handleClick = (event) => {
@@ -11,16 +11,18 @@ function Comment() {
     }
     const onSubmit = (event) => {
         event.preventDefault();
+
+
         const variables = {
             content: commentValue ,
             writer: user.userData._id,
-            postId: videoId,
+            postId: videoId
         }
 
         Axios.post('/api/comment/saveComment', variables )
         .then(response => {
             if(response.data.success ){
-
+                console.log(response.data.result)
             }else{
                 alert(' 커멘트를 저장하지 못했습니다. ')
             }

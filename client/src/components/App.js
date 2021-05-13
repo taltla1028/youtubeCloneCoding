@@ -26,7 +26,7 @@ function App() {
           <Route exact path="/video/upload" component={Auth(VideoUploadPage, true)} />
           <Route exact path="/video/:videoId" component={Auth(VideoDetailPage, null)} />
           <Route exact path="/subscription" component={Auth(SubscriptionPage , null)} />
-          // true 로그인하면들
+          
         </Switch>
       </div>
       <Footer />
