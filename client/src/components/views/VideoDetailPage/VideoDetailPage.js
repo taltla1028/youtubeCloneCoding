@@ -8,9 +8,13 @@ function VideoDetailPage(props) {
 
 
     const videoId = props.match.params.videoId
+
     const [VideoDetail, setVideoDetail ] = useState([]);
+
     const variable = { videoId: videoId }
+
     const [Comments, setComments] = useState([])
+
     useEffect(() => {
 
         Axios.post('/api/video/getVideoDetail', variable)
@@ -35,9 +39,10 @@ function VideoDetailPage(props) {
     }, [])
 
     const refreshFunction = (newComment) => {
-        setComments(Comment.concat(newComment))
+        setComments(Comments.concat(newComment))
 
     }
+
     if(VideoDetail.writer) {
 
         const subscribeButton = VideoDetail.writer._id !== localStorage.getItem('userId') && <Subscribe userTo={VideoDetail.writer._id} userFrom={localStorage.getItem('userId')}/>
