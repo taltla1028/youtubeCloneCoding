@@ -16,15 +16,15 @@ function ReplyComment(props) {
             setChildCommentNumber(commentNumber)
 
             
-        }, [props.commentLists])
+        }, [props.commentLists, props.parentCommentId])
 
-        const renderReplyComment = (parentCommentId) => 
+        const renderReplyComment = (parentCommentId) => {
 
-            props.commentLists.map((comment, index) => (
+          return  props.commentLists.map((comment, index) => (
                 <React.Fragment>
 
-                {
-                    comment.resposeTo === parentCommentId&&
+                
+                    {comment.resposeTo === parentCommentId &&
                     <div style={{ width: '80%', marginLeft:'40px'}}>
                         <SingleComment key={index} refreshFunction={props.refreshFunction} comment={comment} postId={props.videoId} />
                         <ReplyComment refreshFunction={props.refreshFunction} parentCommentId={comment._id} postId={props.videoId} commentLists={props.commentLists} />
@@ -36,6 +36,7 @@ function ReplyComment(props) {
 
             )) 
         
+        }
             const onHandleChange = () => {
                 setOpenReplyComments(!OpenReplyComments)
             }
@@ -48,7 +49,7 @@ function ReplyComment(props) {
                 </p>
             }
     
-            {renderReplyComment(props.parentCommentId)}
+            { OpenReplyComments && renderReplyComment(props.parentCommentId)}
 
         </div>
     )

@@ -55,7 +55,7 @@ router.post("/uplike", (req, res) => {
         if(err) return resjson({ success: false, err})
 
         // 만약에 Dislike 이 이미 클릭이 되었다면, Dislike를 1 줄여준다.
-        Dislike.findByIdAndDelete(variable)
+        Dislike.findOneAndDelete(variable)
             .exec((err, disLikeResult) => {
                 if (err) return res.status(400).json({ success: false, err})
                 res.status(200).json({ success: true })
@@ -78,7 +78,7 @@ router.post("/unLike", (req, res) => {
       }
   
    
-    Like.findByIdAndDelete(variable)
+    Like.findOneAndDelete(variable)
         .exec((err, result)=>{
             if(err) return res.status(400).json({success: false,err})
             res.status(200).json({success: true })
@@ -98,7 +98,7 @@ router.post("/unLike", (req, res) => {
       }
   
    
-    Dislike.findByIdAndDelete(variable)
+    Dislike.findOneAndDelete(variable)
         .exec((err, result)=>{
             if(err) return res.status(400).json({success: false,err})
             res.status(200).json({success: true })
@@ -124,7 +124,7 @@ router.post("/unLike", (req, res) => {
        if (err) return resjson({ success: false, err })
 
        // 만약에 Like 이 이미 클릭이 되었다면, Like 1 줄여준다.
-       Like.findByIdAndDelete(variable)
+       Like.findOneAndDelete(variable)
        .exec((err, likeResult) => {
            if(err) return res.status(400).json({success: false, err })
            res.status(200).json({ success: true })

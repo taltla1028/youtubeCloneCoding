@@ -41,10 +41,8 @@ function Comment(props) {
 
       {/* comment Lists  */}
 
-      {props.commentLists &&
-        props.commentLists.map(
-          (comment, index) =>
-            !comment.responseTo && (
+      {props.commentLists && props.commentLists.map((comment, index) => (
+             (!comment.responseTo && 
               <React.Fragment>
                 <SingleComment
                   refreshFunction={props.refreshFunction}
@@ -58,8 +56,9 @@ function Comment(props) {
                   commentLists={props.commentLists}
                 />
               </React.Fragment>
-            )
-        )}
+             )
+            
+            ))}
 
       {/* Root Comments Form */}
       <form style={{ display: "flex" }} onSubmit={onSubmit}>
@@ -79,3 +78,4 @@ function Comment(props) {
 }
 
 export default Comment;
+
