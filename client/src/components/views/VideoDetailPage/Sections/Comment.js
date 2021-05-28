@@ -3,6 +3,9 @@ import React, { useState } from "react";
 import { useSelector } from "react-redux";
 import SingleComment from "./SingleComment";
 import ReplyComment from "./ReplyComment";
+import {Input} from 'antd'
+
+const { TextArea } = Input;
 
 function Comment(props) {
   const videoId = props.postId;
@@ -40,7 +43,7 @@ function Comment(props) {
       <hr />
 
       {/* comment Lists  */}
-
+      {console.log(props.commentLists)}
       {props.commentLists && props.commentLists.map((comment, index) => (
              (!comment.responseTo && 
               <React.Fragment>
@@ -62,7 +65,7 @@ function Comment(props) {
 
       {/* Root Comments Form */}
       <form style={{ display: "flex" }} onSubmit={onSubmit}>
-        <textarea
+        <TextArea
           style={{ width: "100%", borderRadius: "5px" }}
           onChange={handleClick} //타이핑
           value={commentValue}
